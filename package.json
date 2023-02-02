@@ -1,0 +1,43 @@
+{
+  "name": "pizza-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preserver": "npm run type-check",
+    "server": "claudia-local-api --api-module dist/api.js | bunyan --output short",
+    "test": "mocha --require ts-node/register,mocha-suppress-logs ./test/*.ts",
+    "precreate": "npm run bundle",
+    "preupdate": "npm run bundle",
+    "create": "claudia create --region eu-west-2 --api-module pub/bundle --no-optional-dependencies --runtime nodejs16.x --arch arm64 --memory 128",
+    "update": "claudia update --cache-api-config apiConfig --no-optional-dependencies --runtime nodejs16.x --arch x86_64 --memory 128",
+    "type-check": "tsc",
+    "prebundle": "npm run type-check",
+    "bundle": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^10.0.1",
+    "@types/sinon": "^10.0.13",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "claudia": "^5.14.1",
+    "claudia-local-api": "^3.0.5",
+    "mocha": "^10.2.0",
+    "mocha-suppress-logs": "^0.3.1",
+    "sinon": "^15.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "optionalDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.262.0",
+    "@aws-sdk/util-dynamodb": "^3.262.0",
+    "claudia-api-builder": "^4.1.2",
+    "slugify": "^1.6.5"
+  }
+}
